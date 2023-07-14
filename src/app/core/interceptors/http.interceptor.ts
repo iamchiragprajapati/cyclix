@@ -5,12 +5,17 @@ import {
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ErrorCode, HttpMethod, MessageType } from '../constants/app.constants';
 import { AlertToastrService } from '../services/alert-toastr.service';
 import { LoggerService } from '../services/logger.service';
 
 export const HttpTokenInterceptor: HttpInterceptorFn = (request, next) => {
 
+  const requestUrl = `${environment.hostName}${request.url}`;
+  request = request.clone({
+    url: requestUrl,
+  });
   return next(request).pipe(map((event: HttpEvent<any>) => {
     if (event instanceof HttpResponse) {
       return event.clone({
@@ -45,7 +50,7 @@ export const HttpErrorInterceptor: HttpInterceptorFn = (request: HttpRequest<any
     }
 
     if (request.url.includes('/auth/login')) {
-      switch(error.error.status) {
+      switch (error.error.status) {
         case ErrorCode.unauthorized:
           toasterService.displaySnackBarWithoutTranslation('toasterMessage.loginUnsuccessful', MessageType.error);
           break;

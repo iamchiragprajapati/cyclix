@@ -34,35 +34,49 @@ export class HomeComponent implements OnInit {
   }
 
   getVehicleInfo(): void {
-    this.bikeType = [
-      {
-        TypebikeID: 1,
-        TypebikeName: 'Standard',
-      },
-      {
-        TypebikeID: 2,
-        TypebikeName: 'Cruiser',
-      },
-      {
-        TypebikeID: 3,
-        TypebikeName: 'Touring',
-      },
-    ];
+    this.bikeConfigurationService.getBikeTypeList()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          this.bikeType = res;
+        }
+      })
+    this.bikeConfigurationService.getBikeBrandList()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          this.bikeBrand = res;
+        }
+      })
+    // this.bikeType = [
+    //   {
+    //     TypebikeID: 1,
+    //     TypebikeName: 'Standard',
+    //   },
+    //   {
+    //     TypebikeID: 2,
+    //     TypebikeName: 'Cruiser',
+    //   },
+    //   {
+    //     TypebikeID: 3,
+    //     TypebikeName: 'Touring',
+    //   },
+    // ];
 
-    this.bikeBrand = [
-      {
-        BikebrandID: 1,
-        BikeBrandname: 'Yamaha',
-      },
-      {
-        BikebrandID: 2,
-        BikeBrandname: 'Honda',
-      },
-      {
-        BikebrandID: 3,
-        BikeBrandname: 'BMW',
-      },
-    ];
+    // this.bikeBrand = [
+    //   {
+    //     BikebrandID: 1,
+    //     BikeBrandname: 'Yamaha',
+    //   },
+    //   {
+    //     BikebrandID: 2,
+    //     BikeBrandname: 'Honda',
+    //   },
+    //   {
+    //     BikebrandID: 3,
+    //     BikeBrandname: 'BMW',
+    //   },
+    // ];
   }
 
   onSubmit(formValue: any): void {

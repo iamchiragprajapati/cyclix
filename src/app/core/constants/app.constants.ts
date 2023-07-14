@@ -1,7 +1,7 @@
 export const API_ROUTES = {
-  cyclixSubmitApi: 'cyclix',
-  bikeTypeApi: 'biketype',
-  bikeBrandApi: 'bikebrand',
+  cyclixSubmitApi: 'BikeRequestForm',
+  bikeTypeApi: 'BikeType',
+  bikeBrandApi: 'BikeBrand',
 }
 
 export enum MessageType {
