@@ -1,0 +1,45 @@
+<div class="flex flex-col min-h-[100vh] items-center justify-center">
+  <div class="px-4 sm:px-10 md:px-[100px] w-[670px] h-[320px] max-w-[100%] py-4 sm:py-[44px] rounded-[10px] mt-7">
+    <div class="widget-container">
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <div class="dx-filed">
+          <dx-select-box class="form-control" [(value)]="selectBoxValue" displayExpr="TypebikeName"
+            valueExpr="TypebikeID" [inputAttr]="{ 'aria-label': 'BikeType' }" [(dataSource)]="bikeType"
+            [searchEnabled]="true" label="Bike type" labelMode="floating" #TypebikeID="ngModel" name="TypebikeID"
+            ngModel [labelMode]="'outside'" placeholder="Select bike type" required>
+          </dx-select-box>
+        </div>
+        <ng-container *ngIf="(loginForm.submitted|| TypebikeID.touched) && TypebikeID.errors?.['required']">
+          <p class="text-red text-[14px] ml-2"> {{ 'bike type is required' }} </p>
+        </ng-container>
+        <div class="dx-field mt-2">
+          <dx-select-box class="form-control" displayExpr="BikeBrandname" valueExpr="BikebrandID"
+            [inputAttr]="{ 'aria-label': 'BikeBrand' }" [(dataSource)]="bikeBrand" [searchEnabled]="true"
+            #BikebrandID="ngModel" label="Bike brand" [labelMode]="'floating'" placeholder="Select bike brand"
+            name="BikebrandID" ngModel [labelMode]="'outside'" required>
+          </dx-select-box>
+          <ng-container *ngIf="(loginForm.submitted|| BikebrandID.touched) && BikebrandID.errors?.['required']">
+            <p class="text-red text-[14px] ml-2"> {{ 'Bike brand is required' }} </p>
+          </ng-container>
+        </div>
+        <div class="mt-3 text-right">
+          <button type="submit" [disabled]="isSubmitted" [style.pointer-events]="isSubmitted ? 'none' : ''"
+            [ngClass]="{'pointer-events-none': isSubmitted}"
+            class="common-btn primary-btn font-base font-semibold rounded-[5px] min-w-[120px]">
+            <ng-container *ngIf="!isSubmitted; else spinner;">
+              {{'Submit'}}
+            </ng-container>
+            <ng-template #spinner>
+              <div class="flex justify-center items-center">
+                <div
+                  class="spinner animate-spin inline-block border-4 border-solid rounded-full w-6 h-6 border-x-secondary border-y-transparent"
+                  role="status">
+                </div>
+              </div>
+            </ng-template>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

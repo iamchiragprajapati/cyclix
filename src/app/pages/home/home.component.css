@@ -1,0 +1,5 @@
+::ng-deep .widget-container {
+  padding: 20px;
+  background-color: rgba(191, 191, 191, 0.15);
+  border-radius: 10px;
+}

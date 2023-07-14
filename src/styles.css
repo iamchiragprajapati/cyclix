@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.common-btn {
+  @apply px-4 h-[40px] rounded-[5px];
+
+  &.primary-btn {
+    @apply bg-primary text-white;
+  }
+
+  &.delete-btn {
+    background-color: #D50032;
+  }
+
+  &.secondary-btn {
+    @apply bg-primary-light text-primary;
+  }
+
+  &:disabled {
+    @apply bg-grey-50 text-grey-light cursor-not-allowed;
+  }
+}
